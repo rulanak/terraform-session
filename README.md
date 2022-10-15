@@ -14,8 +14,8 @@ For documentation, please, follow up the links from Terraform official website:
 - [Introduction](https://www.terraform.io/intro)
 - [Documentation](https://www.terraform.io/docs)
 
-**Terraform syntax**
-***
+### **Terraform syntax**
+
 The syntax of the Terraform language consists of only a few basic elements:
 ```
 resource "aws_vpc" "main" {
