@@ -13,3 +13,20 @@ Terraform allows us create another version of infrastructure by pushing it to pr
 For documentation, please, follow up the links from Terraform official website:
 - [Introduction](https://www.terraform.io/intro)
 - [Documentation](https://www.terraform.io/docs)
+
+### **Terraform syntax**
+
+The syntax of the Terraform language consists of only a few basic elements:
+```
+resource "aws_vpc" "main" {
+  cidr_block = var.base_cidr_block
+}
+
+<BLOCK TYPE> "<FIRST_BLOCK LABEL>" "<SECOND_BLOCK LABEL>" {
+  # Block body
+  <IDENTIFIER> = <EXPRESSION> # Argument
+}
+```
+> When we touch logical name/id (second label) terraform will treat it as a new resource.
+
+> Identifier is already predefined by Terraform, but we can give any xpression we want.
