@@ -27,5 +27,6 @@ resource "aws_vpc" "main" {
   <IDENTIFIER> = <EXPRESSION> # Argument
 }
 ```
-> When we touch logical name/id (second label) terraform will treat it as a new resource
-> Identifier is already predefined by Terraform, but we can give any xpression we want
+> When we touch logical name/id (second label) terraform will treat it as a new resource.
+
+> Identifier is already predefined by Terraform, but we can give any xpression we want.
