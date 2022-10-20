@@ -1,53 +1,53 @@
-resource "aws_internet_gateway" "dev-igw" {
+resource "aws_internet_gateway" "internet" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "dev-igw"
+    Name = "${var.env}-igw"
   }
 }
 resource "aws_route_table" "pub-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "dev-pub-rt"
+    Name = "${var.env}-pub-rt"
   }
 }
 resource "aws_route_table" "priv-route-table" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "dev-priv-rt"
+    Name = "${var.env}-priv-rt"
   }
 }
 resource "aws_route" "internet-route" {
   route_table_id         = aws_route_table.pub-route-table.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.dev-igw.id
+  gateway_id             = aws_internet_gateway.internet.id
 
 }
-resource "aws_route_table_association" "dev_rt_pubsub-1" {
+resource "aws_route_table_association" "rt_pubsub-1" {
   subnet_id      = aws_subnet.pub-sub-1.id
   route_table_id = aws_route_table.pub-route-table.id
 }
-resource "aws_route_table_association" "dev_rt_pubsub-2" {
+resource "aws_route_table_association" "rt_pubsub-2" {
   subnet_id      = aws_subnet.pub-sub-2.id
   route_table_id = aws_route_table.pub-route-table.id
 }
-resource "aws_route_table_association" "dev_rt_pubsub-3" {
+resource "aws_route_table_association" "rt_pubsub-3" {
   subnet_id      = aws_subnet.pub-sub-3.id
   route_table_id = aws_route_table.pub-route-table.id
 }
-resource "aws_route_table_association" "dev_rt_privsub-1" {
+resource "aws_route_table_association" "rt_privsub-1" {
   subnet_id      = aws_subnet.priv-sub-1.id
   route_table_id = aws_route_table.priv-route-table.id
 }
-resource "aws_route_table_association" "dev_rt_privsub-2" {
+resource "aws_route_table_association" "rt_privsub-2" {
   subnet_id      = aws_subnet.priv-sub-2.id
   route_table_id = aws_route_table.priv-route-table.id
 }
-resource "aws_route_table_association" "dev_rt_privsub-3" {
+resource "aws_route_table_association" "rt_privsub-3" {
   subnet_id      = aws_subnet.priv-sub-3.id
   route_table_id = aws_route_table.priv-route-table.id
 }
 resource "aws_route" "nat-route" {
   route_table_id         = aws_route_table.priv-route-table.id
   destination_cidr_block = "0.0.0.0/0"
-  nat_gateway_id         = aws_nat_gateway.dev-nat-gw.id
+  nat_gateway_id         = aws_nat_gateway.nat_gw.id
 }

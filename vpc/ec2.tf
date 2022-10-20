@@ -1,7 +1,7 @@
 resource "aws_instance" "main" {
   ami                    = data.aws_ami.amazon-linux-2.image_id
   instance_type          = var.i_type
-  vpc_security_group_ids = [aws_security_group.dev.id]
+  vpc_security_group_ids = [aws_security_group.sg_instance.id]
   subnet_id              = aws_subnet.pub-sub-1.id
   user_data              = file("user_data.sh")
   key_name               = aws_key_pair.ts-key.id
@@ -11,5 +11,5 @@ resource "aws_instance" "main" {
 }
 resource "aws_key_pair" "ts-key" {
   key_name   = "id_rsa.pub"
-  public_key = var.pubkey
+  public_key = file("~/.ssh/id_rsa.pub")
 }
